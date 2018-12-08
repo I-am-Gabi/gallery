@@ -11,16 +11,19 @@
                             <img src="{{ photo.url }}" class="img-fluid">
                         </a>  
                         <div>
-                            </br>
+                        </br>
+                        <form method="post" action = "{% url 'approve' %}" enctype="multipart/form-data">
+                            {% csrf_token %}  
                             {% if photo.is_approved %}
-                                <button type="button" class="btn btn-outline-danger btn-sm">
+                                <button type="submit" name="desaprovar" class="btn btn-outline-danger btn-sm" value="{{photo.uuid}}">
                                     Desaprovar
                                 </button> 
                             {% else %}
-                                <button type="button" class="btn btn-outline-success btn-sm">
+                                <button type="submit" name="aprovar" class="btn btn-outline-success btn-sm" value="{{photo.uuid}}">
                                     Aprovar
                                 </button> 
                             {% endif %} 
+                        </form>
                         </div>   
                     </div>
                 </div> 

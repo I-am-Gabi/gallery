@@ -32,6 +32,13 @@ div.top-header {
     margin-bottom:100px;
 }
 
+h1 {
+    background-color:#02709e;
+    color:white;
+    display:inline-block;
+    font-size: 60px;
+}
+
 h2 {
     background-color:#02709e;
     color:white;

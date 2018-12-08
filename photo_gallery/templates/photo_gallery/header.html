@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+
+            <div class="top-header">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="{% static 'images/OpenCamera1.png' %}" class="img-fluid" /> 
+                    </div>
+                    <div class="col-md-9">
+                        <h1>Galeria dos Noivos</h1>
+                        <p class="lead">
+                            Encontre aqui as fotos do casamento! </br>
+                            Caso tenha alguma foto para mandar ao casal, adicione <a href="{% url 'upload_photo' %}">aqui</a>!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

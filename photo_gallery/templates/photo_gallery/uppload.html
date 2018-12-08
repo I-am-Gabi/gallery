@@ -1,19 +1,41 @@
 {% extends 'photo_gallery/base.html' %} 
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-
 {% block content %} 
-  <form method="post" action = "{% url 'upload_photo' %}" enctype="multipart/form-data">
-    {% csrf_token %}  
-    <input type="file" name="files" multiple>
-    <input type="submit" value="Upload"> 
-  </form> 
 
-  <p><a href="{% url 'gallery' %}">Veja a galeria!</a></p>
+	<div class="top-container">
+		{% include "photo_gallery/header_uppload.html" %}
+	</div>
+
+	{% if messages %}
+		<ul class="messages">
+		{% for message in messages %}
+			<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+	
+	<br /><br />
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-10"> 
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Adicione as fotos</h5>
+						<p class="card-text">Selecione as fotos e clique em 'Upload'.</p>
+
+						<form method="post" action = "{% url 'upload_photo' %}" enctype="multipart/form-data">
+							{% csrf_token %}  
+
+							<input type="file"  name="files" multiple>
+							<br /><br />
+							<input type="submit" class="btn btn-primary mb-2" value="Upload"> 
+
+						</form>  
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 {% endblock %}
