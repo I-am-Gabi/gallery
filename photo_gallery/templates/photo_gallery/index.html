@@ -1,36 +1,31 @@
 {% extends 'photo_gallery/base.html' %}
 
-{% block content %}
+{% block title %}Index{% endblock title %}
 
-<div class="top-container">
-     {% include "photo_gallery/header.html" %}
-</div>
-<br /><br />
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div data-code="example-2">
-                <div class="row justify-content-center">
-                    <div class="col-md-10">
+{% block header %}                       
+    Encontre aqui as fotos do casamento! </br>
+    Caso tenha alguma foto para mandar ao casal, adicione <a href="{% url 'upload_photo' %}"><b>aqui</b></a>!
+{% endblock %}
+
+{% block content %}  
+    <div data-code="example-2">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="row">
+                    {% for photo in photos %}  
+                    <a href="{{ photo }}" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-6">
+                        <img src="{{ photo }}" class="img-fluid">
+                    </a>
+
+                    {% if forloop.counter|divisibleby:2 %}
+                        </div>
                         <div class="row">
-                            {% for photo in photos %}  
-                            <a href="{{ photo }}" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-6">
-                                <img src="{{ photo }}" class="img-fluid">
-                            </a>
-        
-                            {% if forloop.counter|divisibleby:2 %}
-                                </div>
-                                <div class="row">
-                            {% endif %}
-                                
-                            {% endfor %}
-                        </div> 
-                    </div>
-                </div>
-            </div> 
-        </div>
+                    {% endif %}
+                        
+                    {% endfor %}
+                </div> 
+            </div>
+        </div> 
     </div>
-</div>
 
-    
 {% endblock %}

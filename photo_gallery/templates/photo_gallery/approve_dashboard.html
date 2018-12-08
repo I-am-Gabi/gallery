@@ -1,6 +1,13 @@
 {% extends 'photo_gallery/base.html' %}
 
-{% block content %} 
+{% block title %}Fotos{% endblock title %}
+
+{% block header %}                       
+    Selecione as fotos que você deseja que estejam presentes na Galeria. </br>
+    <a href="{% url 'gallery' %}"><b>Voltar para Galeria</b></a>!
+{% endblock %}
+
+{% block content %}  
     <div data-code="example-2">
         <div class="row justify-content-center">
             {% for photo in photos %}    

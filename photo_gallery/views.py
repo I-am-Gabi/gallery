@@ -50,8 +50,8 @@ def upload_photo(request):
                 Metadata={'uuid': uuid_}, 
                 ACL='public-read')
             photo = Photo.objects.create(key=uuid_, is_approved=False)
-            messages.success(request, 'Imagem adicionada.')  
-
+        
+        messages.success(request, 'Imagem adicionada.')  
         return render(request, 'photo_gallery/uppload.html', {messages: messages})
     elif request.method == 'GET': 
         return render(request, 'photo_gallery/uppload.html', {messages: messages})
@@ -64,13 +64,13 @@ def approve(request):
     if request.method == 'POST':  
         if request.POST.get("desaprovar"):
             uuid_ = request.POST.get("desaprovar") 
-            photo = Photo.objects.filter(key=uuid_, is_approved=True).first() 
+            photo = Photo.objects.filter(key=uuid_, is_approved=True).first().update(is_approved=False)
             photo.is_approved = False
         elif request.POST.get("aprovar"): 
             uuid_ = request.POST.get("aprovar") 
-            photo = Photo.objects.filter(key=uuid_, is_approved=False).first() 
+            photo = Photo.objects.filter(key=uuid_, is_approved=False).first().update(is_approved=True)
             photo.is_approved = True
-        photo.save()
+        
 
     photos = []
 
