@@ -1,5 +1,5 @@
 from gallery.settings.common import *
-import django_heroku
+import dj_database_url
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -18,12 +18,9 @@ DATABASES = {
         'PASSWORD': 'gallery123',
         'HOST': 'localhost',
         'PORT': '',
+        'CONN_MAX_AGE': 500,
     }
 } 
-
-
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static')
  
-django_heroku.settings(locals())
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
