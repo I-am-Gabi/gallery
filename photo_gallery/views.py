@@ -22,5 +22,3 @@ def gallery(request):
     #        photos.append(obj.key)
 
     return render(request, 'photo_gallery/index.html', { 'photos' : photos})
-
-#[obj.key for obj in bucket_gallery.objects.all() if Photo.objects.filter(key=obj.key, is_approved=True)]
