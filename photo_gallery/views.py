@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.forms import modelformset_factory
 from django.core.files.base import ContentFile
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from base64 import b64encode
 from .models import Photo  
@@ -55,6 +56,8 @@ def upload_photo(request):
     elif request.method == 'GET': 
         return render(request, 'photo_gallery/uppload.html', {messages: messages})
 
+
+@login_required(login_url='/admin/login/')
 def approve(request): 
     bucket_gallery = s3.Bucket(name=BUCKET_NAME) 
     
