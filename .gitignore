@@ -1,6 +1,4 @@
 *.pyc
 db.sqlite3
 venv
-__pycache__
-gallery/settings/development.py
-gallery/settings/production.py
+__pycache__ 

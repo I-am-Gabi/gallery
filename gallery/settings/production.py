@@ -13,12 +13,12 @@ ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
+        'NAME': os.environ['DATABASES_NAME'],  
+        'USER': os.environ['DATABASES_USER'],
+        'PASSWORD': os.environ['DATABASES_PASSWORD'],
+        'HOST': os.environ['DATABASES_HOST'],
         'PORT': '',
-        'CONN_MAX_AGE': ,
+        'CONN_MAX_AGE': 500,
     }
 } 
  
