@@ -1,0 +1,33 @@
+{% extends 'photo_gallery/base.html' %}
+
+{% block content %} 
+    <div data-code="example-2">
+        <div class="row justify-content-center">
+            {% for photo in photos %}    
+            <div class="col-md-6">  
+                <div class="card" style=""> 
+                    <div class="card-body">
+                        <a href="{{ photo.url }}" class="" data-toggle="lightbox" data-gallery="example-gallery">
+                            <img src="{{ photo.url }}" class="img-fluid">
+                        </a>  
+                        <div>
+                            </br>
+                            {% if photo.is_approved %}
+                                <button type="button" class="btn btn-outline-danger btn-sm">
+                                    Desaprovar
+                                </button> 
+                            {% else %}
+                                <button type="button" class="btn btn-outline-success btn-sm">
+                                    Aprovar
+                                </button> 
+                            {% endif %} 
+                        </div>   
+                    </div>
+                </div> 
+            </br>
+            </div>
+           
+            {% endfor %}
+        </div>
+    </div> 
+{% endblock %}
