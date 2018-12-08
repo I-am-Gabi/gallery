@@ -13,12 +13,12 @@ ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gallery',
-        'USER': 'gallery',
-        'PASSWORD': 'gallery123',
-        'HOST': 'localhost',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': '',
-        'CONN_MAX_AGE': 500,
+        'CONN_MAX_AGE': ,
     }
 } 
  
