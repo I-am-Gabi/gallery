@@ -33,7 +33,6 @@ Crie o banco de dados:
 python manage.py migrate
 python manage.py makemigrations photo_gallery
 python manage.py migrate photo_gallery
-
 ```
 
 Crie um super usuário:
@@ -53,14 +52,12 @@ Rode o servidor:
 
 ```
 python manage.py runserver
-
 ```
 
 No browser acesse:
 
 ```
 http://localhost:8000/
-
 ```
 
 ### Navegue pelo projeto
