@@ -1,4 +1,5 @@
 {% extends 'photo_gallery/base.html' %}
+{% load static %}
 
 {% block title %}Fotos{% endblock title %}
 
@@ -18,26 +19,67 @@
                             <img src="{{ photo.url }}" class="img-fluid">
                         </a>  
                         <div>
-                        </br>
-                        <form method="post" action = "{% url 'approve' %}" enctype="multipart/form-data">
-                            {% csrf_token %}  
+                            </br> 
                             {% if photo.is_approved %}
-                                <button type="submit" name="desaprovar" class="btn btn-outline-danger btn-sm" value="{{photo.uuid}}">
+                                <button id="{{photo.uuid}}" type="submit" class="btn-vote btn btn-outline-danger btn-sm" value="{{photo.uuid}}">
                                     Desaprovar
                                 </button> 
                             {% else %}
-                                <button type="submit" name="aprovar" class="btn btn-outline-success btn-sm" value="{{photo.uuid}}">
+                                <button id="{{photo.uuid}}" type="submit" class="btn-vote btn btn-outline-success btn-sm" value="{{photo.uuid}}">
                                     Aprovar
                                 </button> 
-                            {% endif %} 
-                        </form>
+                            {% endif %}  
                         </div>   
                     </div>
                 </div> 
-            </br>
-            </div>
-           
+                </br>
+            </div> 
             {% endfor %}
         </div>
     </div> 
+   
+    
+    {% block javascript %}
+        {% csrf_token %}
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.btn-vote').click(function(){ 
+                    var token = $('input[name="csrfmiddlewaretoken"]').prop('value');
+
+                    var dataObj = {
+                        'csrfmiddlewaretoken': token,
+                    };
+                    
+                    var $button = this;
+
+                    if ($(this).hasClass("btn-outline-danger")) {
+                        dataObj["desaprovar"] = $(this).val(); 
+                    } else if ($(this).hasClass("btn-outline-success")) {
+                        dataObj["aprovar"] = $(this).val(); 
+                    } 
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{% url 'approve' %}",
+                        data: dataObj   ,
+                        success: function(data) {   
+                            if ($($button).hasClass("btn-outline-danger")) { 
+                                $($button).addClass('btn-outline-success').removeClass('btn-outline-danger');
+                                $($button).html('Aprovar');
+                            } else {
+                                console.log("success");
+                                $($button).addClass('btn-outline-danger').removeClass('btn-outline-success');
+                                $($button).html('Desaprovar');
+                            } 
+                        },
+                        error: function(rs, e) {
+                            console.log(rs.responseText);
+                        }
+                    }); 
+
+                }); 
+            });
+        </script>
+    {% endblock %}
 {% endblock %}
+
