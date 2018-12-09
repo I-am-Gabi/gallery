@@ -64,7 +64,7 @@ def upload_photo(request):
         return render(request, 'photo_gallery/uppload.html', {messages: messages})
 
 
-#@login_required(login_url='/admin/login/') 
+@login_required(login_url='/admin/login/') 
 def approve(request): 
     bucket_gallery = s3.Bucket(name=BUCKET_NAME) 
     
