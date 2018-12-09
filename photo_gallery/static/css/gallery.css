@@ -1,3 +1,15 @@
+.justify-content-end {
+    background: #006fa0;
+}
+
+.nav a {
+    color: white;
+}
+
+.nav a:hover {
+    opacity: 0.5;
+}
+
 div.row > div > div.row {
     margin-bottom: 15px;
 }

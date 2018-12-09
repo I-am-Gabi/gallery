@@ -5,19 +5,32 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet"> 
 
     <body>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'gallery' %}">Galeria</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'upload_photo' %}">Upload</a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'approve' %}">Aprovar Fotos</a>
+            </li>
+        </ul>
+            
         <div class="top-container">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-10"> 
                         <div class="top-header">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 d-md-none d-lg-block">
                                     <img src="{% static 'images/OpenCamera1.png' %}" class="img-fluid" /> 
                                 </div>
                                 <div class="col-md-9">
-                                    <h1>Galeria dos Noivos</h1>
+                                    <h1 style="font-family: 'Courgette', cursive;">Galeria dos Noivos</h1>
                                     <p class="lead"> 
                                     {% block header %} 
                                     {% endblock %}
@@ -25,9 +38,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <p>Bem-vindo, casal! Escolha <a href="{% url 'approve' %}"><b>aqui</b></a> suas fotos.</p>
                     </div> 
                 </div>
             </div>
