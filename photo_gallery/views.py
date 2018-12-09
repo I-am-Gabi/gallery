@@ -44,6 +44,10 @@ def gallery(request):
 
 def upload_photo(request): 
     if request.method == 'POST':    
+        if not request.FILES.getlist('files'):
+            messages.error(request, 'Por favor, envie um arquivo válido.')  
+            return render(request, 'photo_gallery/uppload.html', {messages: messages})
+
         for file in request.FILES.getlist('files'):   
             try:
                 content_file = ContentFile(file.read())
@@ -95,3 +99,12 @@ def approve(request):
                     'uuid': uuid_})
                     
         return render(request, 'photo_gallery/approve_dashboard.html', { 'photos': photos }) 
+
+
+@login_required(login_url='/admin/login/') 
+def clean_all(request):
+    bucket_gallery = s3.Bucket(name=BUCKET_NAME) 
+    bucket_gallery.objects.all().delete()
+    Photo.objects.all().delete()
+    return HttpResponse("done")
+
