@@ -57,19 +57,17 @@ def upload_photo(request):
         return render(request, 'photo_gallery/uppload.html', {messages: messages})
 
 
-#@login_required(login_url='/admin/login/')
+@login_required(login_url='/admin/login/')
 def approve(request): 
     bucket_gallery = s3.Bucket(name=BUCKET_NAME) 
     
     if request.method == 'POST':  
         if request.POST.get("desaprovar"):
             uuid_ = request.POST.get("desaprovar") 
-            photo = Photo.objects.filter(key=uuid_, is_approved=True).first().update(is_approved=False)
-            photo.is_approved = False
+            photo = Photo.objects.filter(key=uuid_).update(is_approved=False) 
         elif request.POST.get("aprovar"): 
             uuid_ = request.POST.get("aprovar") 
-            photo = Photo.objects.filter(key=uuid_, is_approved=False).first().update(is_approved=True)
-            photo.is_approved = True
+            photo = Photo.objects.filter(key=uuid_).update(is_approved=True) 
         
 
     photos = []
@@ -79,10 +77,11 @@ def approve(request):
         uuid_ = uuid.UUID(metadata["uuid"]) 
 
         photo = Photo.objects.filter(key=uuid_).first()
-        params = {'Bucket': BUCKET_NAME, 'Key': file.key}
-        photos.append({ 
-            'url': s3_client.generate_presigned_url('get_object', params),
-            'is_approved': photo.is_approved,
-            'uuid': uuid_ }) 
+        if photo:
+            params = {'Bucket': BUCKET_NAME, 'Key': file.key}
+            photos.append({ 
+                'url': s3_client.generate_presigned_url('get_object', params),
+                'is_approved': photo.is_approved,
+                'uuid': uuid_ }) 
 
     return render(request, 'photo_gallery/approve_dashboard.html', { 'photos': photos }) 
